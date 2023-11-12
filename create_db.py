@@ -16,6 +16,10 @@ CREATE_MESSAGES_TABLE = """CREATE TABLE messages(
     text varchar(255),
     creation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP)"""
 
+SHOW_MESSAGES_TABLE = """
+    SELECT * FROM messages;
+"""
+
 DB_USER = "postgres"
 DB_PASSWORD = "coderslab"
 DB_HOST = "127.0.0.1"
@@ -50,6 +54,15 @@ try:
         print("Table messages created")
     except DuplicateTable as e:
         print("Table exists ", e)
+
+    try:
+        print("Table messages:")
+        print(cursor.execute(SHOW_MESSAGES_TABLE))
+
+    except DuplicateTable as e:
+        print("Table exists ", e)
+
+
     cnx.close()
 except OperationalError as e:
     print("Connection Error: ", e)
